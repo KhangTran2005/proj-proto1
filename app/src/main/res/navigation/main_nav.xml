@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/logIn">
+
+    <fragment
+        android:id="@+id/logIn"
+        android:name="com.example.proj_proto1.LogIn"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/logIn"
+            app:destination="@id/home"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_nav"
+            app:popUpToInclusive="true"
+            />
+        <action
+            android:id="@+id/sendToRegister"
+            app:destination="@id/register"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_nav"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.proj_proto1.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/logOut"
+            app:destination="@id/logIn"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_nav"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/register"
+        android:name="com.example.proj_proto1.Register"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/gotoLogIn"
+            app:destination="@id/logIn"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_nav"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>
