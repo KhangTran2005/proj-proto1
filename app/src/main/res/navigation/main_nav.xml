@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/logIn"
-        android:name="com.example.proj_proto1.LogIn"
+        android:name="com.example.proj_proto1.ui.LogIn"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -27,20 +27,19 @@
     </fragment>
     <fragment
         android:id="@+id/home"
-        android:name="com.example.proj_proto1.Home"
-        android:label="fragment_home"
+        android:name="com.example.proj_proto1.ui.Home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/logOut"
-            app:destination="@id/logIn"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/main_nav"
-            app:popUpToInclusive="true"
-            />
+            android:id="@+id/action_home_to_userInfoFrag"
+            app:destination="@id/userInfoFrag" />
+        <action
+            android:id="@+id/action_home_to_todolistDetail"
+            app:destination="@id/todolistDetail" />
     </fragment>
     <fragment
         android:id="@+id/register"
-        android:name="com.example.proj_proto1.Register"
+        android:name="com.example.proj_proto1.ui.Register"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -50,4 +49,22 @@
             app:popUpTo="@+id/main_nav"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/userInfoFrag"
+        android:name="com.example.proj_proto1.ui.UserInfo"
+        android:label="User Info"
+        tools:layout="@layout/fragment_user_info">
+        <action
+            android:id="@+id/logOut"
+            app:destination="@id/logIn"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_nav"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/todolistDetail"
+        android:name="com.example.proj_proto1.ui.TodolistDetail"
+        android:label="Todolist"
+        tools:layout="@layout/fragment_todolist_detail" />
 </navigation>

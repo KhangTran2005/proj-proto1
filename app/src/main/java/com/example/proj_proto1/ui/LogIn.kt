@@ -1,4 +1,4 @@
-package com.example.proj_proto1
+package com.example.proj_proto1.ui
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.proj_proto1.MainActivity
+import com.example.proj_proto1.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_log_in.*
 import kotlinx.android.synthetic.main.fragment_register.*

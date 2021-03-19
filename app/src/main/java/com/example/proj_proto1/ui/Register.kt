@@ -1,4 +1,4 @@
-package com.example.proj_proto1
+package com.example.proj_proto1.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import com.example.proj_proto1.MainActivity
+import com.example.proj_proto1.R
 import kotlinx.android.synthetic.main.fragment_register.*
 
 
