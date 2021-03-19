@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,7 +73,7 @@ class Home : Fragment() {
         fun bind (list: Todolist){
 
             itemView.setOnClickListener{
-                findNavController().navigate(R.id.todolistDetail)
+                findNavController().navigate(R.id.todolistDetail, bundleOf("todolist" to Json.encodeToString(list)))
             }
 
             title.text = list.todo_name

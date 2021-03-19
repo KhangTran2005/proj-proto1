@@ -12,7 +12,7 @@ data class Todolist(
     var id: String? = null,
     var todo_name: String? = null,
     var members: ArrayList<Member>? = null,
-    var list: ArrayList<Todo>? = null
+    var list: HashMap<String, Todo>? = null
 ){
 
     @Serializable
@@ -24,7 +24,7 @@ data class Todolist(
     data class Todo(
         var task: String? = null,
         var date: String? = null,
-        var priority: String? = null,
+        var priority: Int? = null,
     )
 
     companion object{

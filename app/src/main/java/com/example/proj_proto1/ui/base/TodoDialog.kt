@@ -23,15 +23,16 @@ import com.example.proj_proto1.data.model.Todolist
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.issue_dialog.*
+import kotlinx.android.synthetic.main.issue_dialog.submit_btn
+import kotlinx.android.synthetic.main.issue_dialog.todoNameET
+import kotlinx.android.synthetic.main.todo_dialog.*
 import org.w3c.dom.Text
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
 @Suppress("DEPRECATION")
-class IssueDialog() : DialogFragment() {
-
-    private var bp: Bitmap? = null
+class TodoDialog(var todolist: Todolist) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,21 +43,22 @@ class IssueDialog() : DialogFragment() {
             getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
             getDialog()?.getWindow()?.requestFeature(Window.FEATURE_NO_TITLE);
         }
-        return inflater.inflate(R.layout.issue_dialog, container, false)
+        return inflater.inflate(R.layout.todo_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         submit_btn.setOnClickListener{
-            if (TextUtils.isEmpty(todoNameET.text) || TextUtils.isEmpty(membersET.text)){
+            if (TextUtils.isEmpty(todoET.text) || TextUtils.isEmpty(dateET.text)){
                 Toast.makeText(requireContext(), "empty fields!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val client = Firebase.database.reference
+            Firebase.database.reference
                 .child("todolists")
-                .push()
-            client.setValue(Todolist(client.key, todoNameET.text.toString(), Todolist.parseMembers(membersET.text.toString()), hashMapOf()))
+                .child("${todolist.id}")
+                .child("list")
+                .child(todoET.text.toString()).setValue(Todolist.Todo(todoET.text.toString(), dateET.text.toString(), 4))
                 .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "todolist submitted", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "todo added", Toast.LENGTH_SHORT).show()
                     dismiss()
                 }
                 .addOnFailureListener{
@@ -66,6 +68,6 @@ class IssueDialog() : DialogFragment() {
     }
 
     companion object{
-        const val TAG = "issue_dialog"
+        const val TAG = "todo_dialog"
     }
 }
