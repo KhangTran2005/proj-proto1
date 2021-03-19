@@ -12,15 +12,31 @@ import androidx.navigation.fragment.findNavController
 import com.example.proj_proto1.MainActivity
 import com.example.proj_proto1.R
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_log_in.*
 import kotlinx.android.synthetic.main.fragment_register.*
 
 class LogIn : Fragment() {
+
+    private var username: String? = null
+    private val currentUser: FirebaseUser? by lazy {
+        MainActivity.mAuth.currentUser
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        arguments?.let{
+            it.getString("username")?.let { it1 ->
+                username = it1
+            }
+        }
+
         return inflater.inflate(R.layout.fragment_log_in, container, false)
     }
 
@@ -58,6 +74,11 @@ class LogIn : Fragment() {
                             }
                             else{
                                 Toast.makeText(context, "Sign In Success", Toast.LENGTH_SHORT).show()
+                                if (user != null && username != null){
+                                    Firebase.database.reference.child("users")
+                                            .child(user.email.toString().substringBefore("@"))
+                                            .child("name").setValue(username)
+                                }
                                 logIn()
                             }
                         }

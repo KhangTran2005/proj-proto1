@@ -54,7 +54,7 @@ class IssueDialog() : DialogFragment() {
             val client = Firebase.database.reference
                 .child("todolists")
                 .push()
-            client.setValue(Todolist(client.key, todoNameET.text.toString(), Todolist.parseMembers(membersET.text.toString()), hashMapOf()))
+            client.setValue(Todolist(client.key, todoNameET.text.toString(), Todolist.parseMembers(membersET.text.toString(), client.key.toString()), hashMapOf()))
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), "todolist submitted", Toast.LENGTH_SHORT).show()
                     dismiss()

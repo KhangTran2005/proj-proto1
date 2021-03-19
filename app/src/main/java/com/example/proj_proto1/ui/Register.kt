@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.proj_proto1.MainActivity
@@ -61,8 +62,7 @@ class Register : Fragment() {
                                 }
                             }
 
-                            val action = RegisterDirections.gotoLogIn()
-                            findNavController().navigate(action)
+                            findNavController().navigate(R.id.logIn, bundleOf("username" to regi_name_input.text.toString()))
                         }
                         else{
                             Toast.makeText(

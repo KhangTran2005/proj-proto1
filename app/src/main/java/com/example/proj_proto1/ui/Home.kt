@@ -1,6 +1,7 @@
 package com.example.proj_proto1.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab3.IssueDialog
+import com.example.proj_proto1.MainActivity
 import com.example.proj_proto1.R
 import com.example.proj_proto1.data.model.Todolist
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -44,9 +46,14 @@ class Home : Fragment() {
             IssueDialog().show(childFragmentManager, IssueDialog.TAG)
         }
 
+        val keyRef = database.reference
+                .child("users")
+                .child(MainActivity.mAuth.currentUser?.email.toString().substringBefore("@"))
+                .child("keys")
+
         val options = FirebaseRecyclerOptions.Builder<Todolist>()
             .setLifecycleOwner(viewLifecycleOwner)
-            .setQuery(database.reference.child("todolists"), Todolist::class.java)
+            .setIndexedQuery(keyRef, database.reference.child("todolists"), Todolist::class.java)
             .build()
 
         val firebaseAdapter = object: FirebaseRecyclerAdapter<Todolist, Home.ViewHolder>(options){
@@ -71,7 +78,6 @@ class Home : Fragment() {
         val members = item.findViewById<TextView>(R.id.members)
 
         fun bind (list: Todolist){
-
             itemView.setOnClickListener{
                 findNavController().navigate(R.id.todolistDetail, bundleOf("todolist" to Json.encodeToString(list)))
             }
